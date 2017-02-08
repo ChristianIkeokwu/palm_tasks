@@ -17,7 +17,11 @@ class User(object):
         self.password = password
         self._id = uuid.uuid4().hex if _id is None else _id
         self.title = title
-        self.department = Department.get_by_name(department)
+        try:
+            department = Department.get_by_name(department)
+        except TypeError:
+            department = department
+        self.department = department
         self.meetings = meetings
         self.projects = projects
 
