@@ -13,7 +13,7 @@ TODO configure IE support -->
 
 
 {% block content %}
- <!-- if staff.department.head == user %} -->
+{% if staff.department.head == user %}
 
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
     <div class="page-header">
@@ -95,7 +95,7 @@ TODO configure IE support -->
     </div>
     {% endfor %}
 </div>
-<!-- {% else %} -->
+{% else %}
 
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 <div class="page-header">
@@ -111,7 +111,7 @@ TODO configure IE support -->
 </p>
 
 </div>
-<!-- {% endif %} -->
+{% endif %}
 {% endblock %}
 <!-- Bootstrap core JavaScript
 ==================================================
