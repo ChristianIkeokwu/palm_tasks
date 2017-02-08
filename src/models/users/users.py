@@ -92,7 +92,7 @@ class User(object):
             "first_name": self.first_name,
             "last_name": self.last_name,
             "title": self.title,
-            "department": self.department.name,
+            "department": self.department if type(self.department) == str else self.department.name,
             "meetings": list(set(self.meetings)), #remove duplicates and then sort
             "projects": list(set(self.projects)) # last line
         }
