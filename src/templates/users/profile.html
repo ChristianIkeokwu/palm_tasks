@@ -13,7 +13,7 @@ TODO configure IE support -->
 
 
 {% block content %}
- <!-- if staff.department.head == user  -->
+
 
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
     <div class="page-header">
@@ -95,23 +95,7 @@ TODO configure IE support -->
     </div>
     {% endfor %}
 </div>
-<!--  else  -->
 
-<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-<div class="page-header">
-    <h1>{{ staff.first_name.capitalize() }}'s Profile
-    </h1>
-
-</div>
-<p style="font-size:23px;">
-    Name : {{staff}} <br />
-    Email : {{ staff.email }} <br />
-    Department : <a href="{{ url_for('department.home', department_id=staff.department._id ) }}">{{ staff.department.name }}</a><br />
-
-</p>
-
-</div>
-<!-- endif  -->
 {% endblock %}
 <!-- Bootstrap core JavaScript
 ==================================================
