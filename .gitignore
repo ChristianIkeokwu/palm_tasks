@@ -1,4 +1,2 @@
+.idea/
 *.pyc
-.idea
-sandbox *
-__pycache__
