@@ -1,0 +1,153 @@
+{% extends 'base.html' %}
+<link rel="icon" href="../../favicon.ico">
+
+{% block title %}  {{ staff.first_name.capitalize() }}'s Profile   {% endblock %}
+
+{% block custom %}
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug
+<link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+TODO configure IE support -->
+<!-- Custom styles for this template -->
+<link href="{{url_for('static', filename='css/dashboard.css')}}" rel="stylesheet">
+{% endblock %}
+
+
+{% block content %}
+{% if staff.department.head == user %}
+
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <div class="page-header">
+        <h1>{{ staff.first_name.capitalize() }}'s Profile
+            <div class="btn-group pull-right">
+                <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false">
+                    <span class="glyphicon glyphicon-plus"></span> Add New <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="{{url_for('tasks.new_task')}}">Task</a></li>
+                    <li><a href="{{url_for('meetings.new_meeting')}}">Meeting</a></li>
+                    <li><a href="{{url_for('projects.new_project')}}">Project</a></li>
+
+                </ul>
+            </div>
+        </h1>
+
+
+
+    </div>
+
+
+    <div class="row placeholders">
+        <div class="col-xs-6 col-sm-3 placeholder">
+            <div id="donut-example" style="width:200px;height:200px"></div>
+            <h4>{{ staff.first_name.capitalize() }}'s Day </h4>
+
+        </div>
+        <div class="col-xs-6 col-sm-3 placeholder">
+            <div id="donut-example1" style="width:200px;height:200px"></div>
+            <h4>{{ staff.first_name.capitalize() }}'s Week</h4>
+
+        </div>
+        <div class="col-xs-6 col-sm-3 placeholder">
+            <div id="donut-example2" style="width:200px;height:200px"></div>
+            <h4> {{ staff.first_name.capitalize() }}'s Month</h4>
+
+        </div>
+        <div class="col-xs-6 col-sm-3 placeholder">
+            <div id="donut-example3" style="width:200px;height:200px"></div>
+            <h4>{{ staff.first_name.capitalize() }}'s Year</h4>
+
+        </div>
+    </div>
+
+<p style="font-size:23px;">
+    Name : {{staff}} <br />
+    Email : {{ staff.email }} <br />
+    Department : <a href="{{ url_for('department.home', department_id=staff.department._id ) }}">{{ staff.department.name }}</a><br />
+</p>
+    <h2 class="sub-header">Projects</h2>
+
+    {% for project in staff.get_projects() %}
+
+    <h4><a href="{{url_for('projects.home',project_id=project._id)}}"> {{ project.name }} </a></h4>
+    <div class="progress">
+        <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="40"
+             aria-valuemin="0" aria-valuemax="100" style="width: {{project.progress()}}%;min-width: 2em;">
+            <span class="sr-only">{{project.progress()}} Complete (success)</span>
+            {{project.progress()}}%
+        </div>
+    </div>
+
+    {% endfor %}
+
+    <h2 class="sub-header">Meetings</h2>
+
+    {% for meeting in staff.get_meetings() %}
+
+    <div class="list-group">
+        <a href="{{url_for('meetings.home',meeting_id=meeting._id)}}" class="list-group-item">
+            <h4 class="list-group-item-heading">{{ meeting.name }}</h4>
+            <p class="list-group-item-text">Called by: {{ meeting.caller }}</p>
+            <p class="list-group-item-text">Location: {{ meeting.location }}</p>
+            <p class="list-group-item-text">Time: {{ meeting.date_time.strftime('%d-%m-%Y %H:%M') }} </p>
+        </a>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+<div class="page-header">
+    <h1>{{ staff.first_name.capitalize() }}'s Profile
+    </h1>
+
+</div>
+<p style="font-size:23px;">
+    Name : {{staff}} <br />
+    Email : {{ staff.email }} <br />
+    Department : <a href="{{ url_for('department.home', department_id=staff.department._id ) }}">{{ staff.department.name }}</a><br />
+
+</p>
+
+</div>
+{% endif %}
+{% endblock %}
+<!-- Bootstrap core JavaScript
+==================================================
+
+<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script> -->
+{% block custom_script %}
+<script src="{{url_for('static', filename='js/raphael-min.js')}}"></script>
+<script src="{{url_for('static', filename='js/jquery-1.8.2.min.jss')}}"></script>
+<script src="{{url_for('static', filename='js/morris-0.4.1.min.js')}}"></script>
+
+{% set list = ['donut-example' ,'donut-example1' ,'donut-example2' ,'donut-example3'] %}
+{% for elem in list %}
+<script>
+    Morris.Donut({
+    element: '{{ elem }}',
+    data: [
+        {label: "Completed Tasks", value: 3},
+        {label: "Pending Tasks", value: 2},
+        {label: "Tasks in Progress", value: 5},
+
+    ],
+    colors: ["#5cb85c",
+            "#7DF939",
+            "#419641",
+  ]
+    });
+
+
+
+
+
+
+
+
+
+</script>
+{% endfor %}
+
+{% endblock %}

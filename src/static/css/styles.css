@@ -1,0 +1,39 @@
+
+body {
+ background-color: rgba(0, 0, 0, 0.19);
+ }
+#home-jumbo {
+    max-width: 1000px;
+    padding: 25px;
+    margin: 35px auto;
+}
+
+.green {
+    background-image: linear-gradient(to bottom, #5cb85c 0%, #419641 100%);
+    color: white;
+    background-color: #5cb85c;
+
+}
+
+
+
+.form {
+    max-width: 1000px;
+    margin:35px auto;
+}
+
+.register-form {
+    padding: 10px 10px 15px 15px;
+
+
+}
+
+#title-dropdown {
+
+margin-top: 24px;
+}
+
+#register-button {
+    padding-left: 425px;
+    padding-top: 15px;
+}

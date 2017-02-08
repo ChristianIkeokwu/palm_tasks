@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+
+{% block custom %}
+<link href="{{url_for('static',filename='css/jquery.circliful.css')}}" rel="stylesheet" type="text/css"/>
+{% endblock %}
+{% block title %} {{ project.name }} {% endblock %}
+{% block content %}
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <div class="page-header">
+    <h1>{{ project.name}}</h1>
+
+</div>
+</div>
+
+<div class="row placeholders">
+
+    <div class="col-xs-6 col-sm-3 placeholder">
+        <div id="myStat" data-dimension="250" data-text="Completed " data-info="New Clients" data-width="30" data-fontsize="20"
+             data-percent="35" data-fgcolor="rgb(126,165,104)" data-bgcolor="#eee"></div>
+    </div>
+    <div class="col-xs-6 col-sm-3 placeholder">
+         <div id="myStat1" data-dimension="250" data-text="In-Progress" data-info="New Clients" data-width="30" data-fontsize="20"
+             data-percent="35" data-fgcolor="rgb(126,165,104)" data-bgcolor="#eee" data-fill="#7DF939"></div>
+    </div>
+    <div class="col-xs-6 col-sm-3 placeholder">
+         <div id="myStat2" data-dimension="250" data-text="Pending " data-info="New Clients" data-width="30" data-fontsize="20"
+             data-percent="35" data-fgcolor="#61a9dc" data-bgcolor="#eee" data-fill="#419641"></div>
+    </div>
+    <div class="col-xs-6 col-sm-3 placeholder">
+         <div id="myStat3" data-dimension="250" data-text="Total " data-info="New Clients" data-width="30" data-fontsize="20"
+             data-percent="35" data-fgcolor="#61a9dc" data-bgcolor="#eee" data-fill="#5cb85c"></div>
+    </div>
+</div>
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-1 main">
+    <div class="sub-header">
+    <h2>Project Tasks
+     <div class="btn-group pull-right">
+         <a  type="button" class="btn btn-success" href="{{url_for('projects.new_task', project_id=project._id)}}">
+         <span class="glyphicon glyphicon-plus"></span> Add Task
+         </a>
+    </div>
+    </h2>
+
+</div>
+<div class="list-group">
+    {% for task in project.all_active_tasks() %}
+    <a href="{{ url_for('tasks.home', task_id=task._id) }}" class="list-group-item">
+        <span class="glyphicon glyphicon-hourglass pull-right"></span>
+        {% set class = ['info','success','warning','danger'] %}
+
+        <h4 class="list-group-item-heading">{{ task.name }} <span class="label label-{{ class[task.priority]}}">{{ priority_list[task.priority]}}</span></h4>
+    </a>
+    {% endfor %}
+</div>
+
+<!--a class="btn btn-success" href="{{ url_for('projects.new_project') }}"><span
+        class="glyphicon glyphicon-plus"></span> Create new</a-->
+<br />
+<div class="sub-header">
+    <h2>Project Notes
+     <div class="btn-group pull-right">
+         <a  type="button" class="btn btn-success" href="{{url_for('projects.new_note', project_id=project._id)}}">
+         <span class="glyphicon glyphicon-plus"></span> Add Note
+         </a>
+    </div> </h2>
+
+</div>
+{% for comment in project.comments %}
+<div class="panel panel-success">
+  <div class="panel-heading">Project Note</div>
+  <div class="panel-body">
+      <p> {{ comment }} </p>
+  </div>
+</div>
+{% endfor %}
+{% endblock %}
+
+{% block custom_script %}
+<script>
+$( document ).ready(function() {
+		$('#myStat').circliful(
+		{
+            animation: 1,
+            animationStep: 6,
+            start: 2,
+            backgroundColor: '#eee',
+            foregroundColor: '#5cb85c',
+            fontColor: '#000',
+
+        });
+    });
+$( document ).ready(function() {
+		$('#myStat1').circliful({
+            animation: 1,
+            animationStep: 6,
+            start: 2,
+            backgroundColor: '#eee',
+            foregroundColor: '#5cb85c',
+            fontColor: '#000',
+
+        });
+    });
+$( document ).ready(function() {
+		$('#myStat2').circliful({
+            animation: 1,
+            animationStep: 6,
+            start: 2,
+            backgroundColor: '#eee',
+            foregroundColor: '#5cb85c',
+            fontColor: '#000',
+
+        });
+    });
+$( document ).ready(function() {
+		$('#myStat3').circliful({
+            animation: 1,
+            animationStep: 6,
+            start: 2,
+            backgroundColor: '#eee',
+            foregroundColor: '#5cb85c',
+            fontColor: '#000',
+
+        });
+    });
+</script>
+
+<script src="{{url_for('static',filename='js/jquery.circliful.min.js')}}"></script>
+{% endblock %}

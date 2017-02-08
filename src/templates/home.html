@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %} Palm Tasks {% endblock %}
+{% block content %}
+
+<div class="jumbotron" id="home-jumbo">
+    <h1>Welcome to Palm Tasks!</h1>
+    <p>A service for Task Management and Scheduling to ensure persistent productivity in the workplace.</p> <!-- TODO the link should redirect to the training part if user is logged in -->
+    {% if not session['email'] %}
+    <p><a class="btn btn-primary btn-lg btn-success" href="{{ url_for('.register') }}" role="button">Flourish Now!</a></p>
+    {% else %}
+    <p><a class="btn btn-primary btn-lg btn-success" href="#get-started" role="button">Flourish Now!</a></p>
+    {% endif %}
+</div>
+
+{% endblock %}

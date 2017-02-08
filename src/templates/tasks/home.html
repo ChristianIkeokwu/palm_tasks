@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ task.name }} {% endblock %}
+
+{% block content %}
+
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+
+    <div class="page-header">
+    <h1>{{ task.name}}</h1>
+
+</div>
+<p style="font-size:20px;">Due Date: {{ task.due_date.strftime('%d-%m-%Y %H:%M')}}
+    <br />Project: <a href="{{ url_for('projects.home',project_id=task.project) }}">{{ Project.get_by_id(task.project).name }}</a>
+{% set class = ['info','success','warning','danger'] %}
+<br />Priority: <span class="label label-{{ class[task.priority]}}">{{ priority_list[task.priority]}}</span>
+{% if task.rating >= 5 %}
+<br /> Rating: {{ task.rating }} <span class="glyphicon glyphicon-thumbs-up"></span>
+{% else %}
+<br /> Rating: {{ task.rating }} <span class="glyphicon glyphicon-thumbs-down"></span>  </p>
+{% endif %}
+<div class="sub-header">
+    <h2>Progress Notes
+     <div class="btn-group pull-right">
+         <a  type="button" class="btn btn-success" href="{{url_for('tasks.new_note', task_id=task._id)}}">
+         <span class="glyphicon glyphicon-plus"></span> Add Note
+         </a>
+    </div></h2>
+    <br />
+
+</div>
+{% for comment in task.comments %}
+<div class="panel panel-success">
+  <div class="panel-heading">Progress Note</div>
+  <div class="panel-body">
+      <p> {{ comment }} </p>
+  </div>
+</div>
+{% endfor %}
+
+<a class="btn btn-success" href="{{url_for('tasks.complete_task',task_id=task._id)}}" role="button"> <span class="glyphicon glyphicon-ok"></span>  Mark as Complete  </a>
+<br />
+</div>
+{% endblock %}

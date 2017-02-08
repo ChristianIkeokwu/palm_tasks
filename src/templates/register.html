@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+
+{% block title %} Register {% endblock %}
+
+{% block content %}
+
+<div class="form">
+    <form action="#" method="post">
+        <div class="col-xs-6 col-sm-6 col-md-6">
+            <div class="form-group">
+                <label for="first_name"> First Name </label>
+                <input type="text" class="form-control" id="first_name" name="first_name" placeholder="Kola">
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6">
+            <div class="form-group">
+                <label for="last_name">Last Name</label>
+                <input name="last_name" type="text" class="form-control" id="last_name" placeholder="Adeyemo">
+            </div>
+        </div>
+
+        <div class="form-group register-form">
+
+            <label for="email">Email Address</label>
+            <input name="email" type="text" class="form-control" id="email" placeholder="amaka_chigbu@gmail.com">
+        </div>
+
+        <div class="col-xs-6 col-sm-6 col-md-6">
+            <div class="form-group">
+                <label for="title">Title</label>
+                <select name="title" id="title" class="form-control">
+                    <option>Pastor</option>
+                    <option>Deacon</option>
+                    <option>Deaconess</option>
+                    <option>Bro</option>
+                    <option>Sis</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6">
+            <div class="form-group">
+                <label for="department">Department</label>
+                <input type="text" class="form-control" id="department" name="department"
+                       value="Loveworld Publishing Ministry">
+            </div>
+        </div>
+        <div class="form-group register-form ">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-lock "></i></span>
+                <input id="password" type="password" class="form-control" name="password" placeholder="Password">
+            </div>
+            <div id="register-button">
+                <input class="btn btn-lg btn-success" type="submit" name="signup" value="Sign Up"/>
+            </div>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

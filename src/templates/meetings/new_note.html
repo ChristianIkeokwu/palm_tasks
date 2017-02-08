@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %} New Note {% endblock %}
+{% block content %}
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+<form method="post">
+<div class="form-group">
+        <label for="meeting-note">New Note for meeting  "<a href="{{ url_for('meetings.home',meeting_id=meeting._id) }}">{{ meeting.name }}</a>"</label>
+        <textarea class="form-control" rows="5" id="meeting-note" name="meeting-note" placeholder="Follow up tasks for the meetings are..." ></textarea>
+    </div>
+  <div>
+        <input class="btn  btn-success" type="submit" name="submit" value="Submit"/>
+    </div>
+</form>
+</div>
+
+{% endblock %}

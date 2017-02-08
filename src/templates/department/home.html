@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ department.name }} {% endblock %}
+
+{% block content %}
+{% set class = ['info','success','warning','danger'] %}
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-1 main">
+    <div class="page-header">
+        <h1>{{ department.name }}
+            <small> Department head: <a href="{{ url_for('users.view', user_id=department.head._id)}}">{{ department.head }}</a></small>
+        </h1>
+    </div>
+
+    <p style="font-size:23px;"> Size: {{ department.members.__len__() }} <br/>
+        Super Department: {{ department.superd.name }}</p>
+
+
+    <div class="sub-header">
+        <h3> Department Members</h3>
+        <div class="list-group">
+            {% for member in department.members %}
+            <a href="{{ url_for('users.view', user_id=member._id) }}" class="list-group-item">
+                <span class="glyphicon glyphicon-user pull-right"></span>
+
+                <h4 class="list-group-item-heading">{{ member }}</h4>
+            </a>
+            {% endfor %}
+        </div>
+        <br/>
+
+        </div>
+        {% endblock %}

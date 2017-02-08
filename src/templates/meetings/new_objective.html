@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %} New Objective{% endblock %}
+{% block content %}
+
+<div class="alert alert-warning alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <strong>Warning!</strong> Better check yourself, you're not looking too good.
+</div>
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+<form method="post">
+<div class="form-group">
+        <label for="objective">New Objective for meeting  "<a href="{{ url_for('meetings.home',meeting_id=meeting._id) }}">{{ meeting.name }}</a>"</label>
+        <textarea class="form-control" rows="5" id="objective" name="objective" placeholder="Seperate each additional objective by a full stop e.g Discuss new budget. Appoint new team leaders. Discuss strategic plan." ></textarea>
+    </div>
+  <div>
+        <input class="btn  btn-success" type="submit" name="submit" value="Submit"/>
+    </div>
+</form>
+</div>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %} New Member{% endblock %}
+{% block content %}
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+<form method="post">
+<div class="form-group">
+        <label for="members">New Attendants for meeting  "<a href="{{ url_for('meetings.home',meeting_id=meeting._id) }}">{{ meeting.name }}</a>"</label>
+        <textarea class="form-control" rows="5" id="members" name="members" placeholder="Write the email adresses of all additional members of the meetings seperated by commas.
+eg. amaka@gmail.com, demola@yahoo.com, jide@hotmail.com "></textarea>
+    </div>
+  <div>
+        <input class="btn  btn-success" type="submit" name="submit" value="Submit"/>
+    </div>
+</form>
+</div>
+{% endblock %}

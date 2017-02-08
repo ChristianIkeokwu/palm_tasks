@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %} New Task {% endblock %}
+{% block content %}
+<form method="post">
+    <div class="form-group">
+        <label for="name">Meeting Name </label>
+        <input type="text" class="form-control" name="name" id="name">
+    </div>
+
+    <div class="form-group">
+        <label for="date">Meeting Date: DD/MM/YYYY </label>
+        <input type="text" class="form-control" name="date" id="date">
+
+    </div>
+     <div class="col-xs-6 col-sm-6 col-md-6">
+            <div class="form-group">
+                <label for="hour"> Hour 24h </label>
+                <select  class="form-control" id="hour" name="hour">
+                    {% for hour in range(24) %}
+                    <option value="{{hour}}">{{ hour }} </option>
+                    {% endfor %}
+                </select>
+
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6">
+            <div class="form-group">
+                <label for="min">Minute</label>
+                <select  class="form-control" id="min" name="min">
+                    {% for min in range(0,60,10) %}
+                    <option value="{{min}}">{{ min }} </option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+    <!-- owner is the session['email'] -->
+    <div class="form-group">
+        <label for="location">Location</label>
+        <input type="text" class="form-control" name="location" id="location">
+    </div>
+
+    <div class="form-group">
+        <label for="members">Attendants</label>
+        <textarea class="form-control" rows="5" id="members" name="members" placeholder="Write the email adresses of all expected members of the meetings seperated by commas.
+eg. amaka@gmail.com, demola@yahoo.com, jide@hotmail.com "></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="objectives">Meeting Objectives</label>
+        <textarea class="form-control" rows="5" id="objectives" name="objectives" placeholder="Write all the meeings objectives as full sentences seperated by FULL STOPS"></textarea>
+    </div>
+    <button type="submit" class="btn btn-success">Create Meeting</button>
+</form>
+{% endblock %}

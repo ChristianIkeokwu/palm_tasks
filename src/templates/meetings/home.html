@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ meeting.name }} {% endblock %}
+
+{% block content %}
+{% set class = ['info','success','warning','danger'] %}
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-1 main">
+    <div class="page-header">
+        <h1>{{ meeting.name }}
+            <small>by <a href="{{ url_for('users.view', user_id=meeting.caller._id)}}">{{ meeting.caller }}</a></small>
+        </h1>
+    </div>
+
+    <p style="font-size:23px;">Location: {{meeting.location}} <br/> Meeting Time: {{meeting.date_time.strftime('%d-%m-%Y
+        %H:%M')}}</p>
+
+
+    <div class="sub-header">
+        <h3>Members
+            <div class="btn-group pull-right">
+                <a type="button" class="btn btn-success" href="{{url_for('meetings.new_member', meeting_id=meeting._id)}}">
+                    <span class="glyphicon glyphicon-plus"></span> Add Member
+                </a>
+            </div>
+        </h3>
+        <div class="list-group">
+            {% for member in meeting.members %}
+            <a href="{{ url_for('users.view', user_id=member._id) }}" class="list-group-item">
+                <span class="glyphicon glyphicon-user pull-right"></span>
+                {% set class = ['info','success','warning','danger'] %}
+
+                <h4 class="list-group-item-heading">{{ member }}</h4>
+            </a>
+            {% endfor %}
+        </div>
+        <br/>
+        <div class="sub-header">
+            <h3>Objectives
+                <div class="btn-group pull-right">
+                    <a type="button" class="btn btn-success" href="{{url_for('meetings.new_objective', meeting_id=meeting._id)}}">
+                        <span class="glyphicon glyphicon-plus"></span> Add Objective
+                    </a>
+                </div>
+            </h3>
+            <div class="panel panel-success">
+                <div class="panel-heading"></div>
+                <div class="panel-body">
+                    <p>
+                    <ol>
+                        {% for objective in meeting.objectives %}
+                        <li>{{ objective }}</li>
+                        {% endfor %}
+                    </ol>
+                    </p>
+                </div>
+            </div>
+
+            <br/>
+            <div class="sub-header">
+                <h3>Meeting Notes
+                    <div class="btn-group pull-right">
+                        <a type="button" class="btn btn-success" href="{{url_for('meetings.new_note', meeting_id=meeting._id)}}">
+                            <span class="glyphicon glyphicon-plus"></span> Add Note
+                        </a>
+                    </div>
+                </h3>
+
+            </div>
+
+            {% for comment in meeting.comments %}
+            <div class="panel panel-success">
+                <div class="panel-heading">Meeting Note</div>
+                <div class="panel-body">
+                    <p> {{ comment }} </p>
+                </div>
+            </div>
+
+            {% endfor %}
+
+        </div>
+        {% endblock %}

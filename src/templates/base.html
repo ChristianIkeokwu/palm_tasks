@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="png" href="{{ url_for('static', filename='img/logo1.png') }}">
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css')}}">
+<script src="{{ url_for('static', filename='js/jquery-2.2.0.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+
+{% block custom %} {% endblock %}
+    <title>
+        {% block title %} {% endblock %} | Palm Tasks
+    </title>
+    {% if not session['email'] %}
+
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{{ url_for('home') }}"><img style="max-height:150%; margin-top: -7px;"
+                                                                          src="{{ url_for('static', filename='img/logo0.png') }}">
+                </a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false">About Us <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{ url_for('our_mission') }}">Our Mission</a></li>
+                            <li><a href="{{ url_for('our_team') }}">Our Team</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="{{ url_for('.register') }}" title="Sign up"><span
+                            class="glyphicon glyphicon-user"></span> Sign up</a></li>
+                    <li><a href="{{ url_for('.login') }}" title="Log in"><span
+                            class="glyphicon glyphicon-log-in"></span> Log in</a></li>
+
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+    {% else %}
+    {% include 'users/user_nav.html'%}
+    {% endif %}
+</head>
+<body style="padding-top: 35px;">
+<div class="container">
+{% block content %}
+
+
+<script src="{{ url_for('static', filename='js/jquery-2.2.0.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+{% endblock %}
+</div>
+
+
+{% block custom_script %} {% endblock %}
+
+</body>
+
+
+</html>

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %} New Task {% endblock %}
+{% block content %}
+<form method="post">
+    <div class="form-group">
+        <label for="name">Task Name </label>
+        <input type="text" class="form-control" name="name" id="name">
+    </div>
+
+    <div class="form-group">
+        <label for="due_date">Due Date: DD/MM/YYYY </label>
+        <input type="text" class="form-control" name="due_date" id="due_date">
+    </div>
+    <!-- owner is the session['email'] -->
+    <div class="form-group">
+        <label for="project">Project</label>
+        <select name="project" id="project" class="form-control">
+            {% for project in user.projects %}
+            {% set project = Project.get_by_id(project) %}
+            <option value="{{ project._id }}">{{ project.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="priority">Priority</label>
+        <select name="priority" id="priority" class="form-control">
+            {% for priority in priority_list %}
+            <option value="{{ priority_list.index(priority) }}">{{ priority }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <button type="submit" class="btn btn-success">Create Task</button>
+</form>
+{% endblock %}

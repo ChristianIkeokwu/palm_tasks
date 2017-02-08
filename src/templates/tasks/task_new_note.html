@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %} New Note {% endblock %}
+{% block content %}
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+<form method="post">
+    <div class="form-group">
+        <label for="task-note"> Note on Task  "<a href="{{ url_for('tasks.home',task_id=task._id) }}">{{ task.name }}</a>"</label>
+        <textarea class="form-control" rows="10" id="task-note" name="task-note"
+                  placeholder="I've done the following things to complete this task..."></textarea>
+    </div>
+
+    <div>
+        <input class="btn  btn-success" type="submit" name="submit" value="Submit"/>
+    </div>
+</form>
+</div>
+{% endblock %}

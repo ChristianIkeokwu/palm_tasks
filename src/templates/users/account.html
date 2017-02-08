@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+
+{% block title %} Register {% endblock %}
+{% block content %}
+
+<div class="form">
+    <form action="#" method="post">
+        <div class="col-xs-6 col-sm-6 col-md-6">
+            <div class="form-group">
+                <label for="first_name"> First Name </label>
+                <input type="text" class="form-control" id="first_name" disabled="disabled" name="first_name" value="{{user.first_name}}">
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6">
+            <div class="form-group">
+                <label for="last_name">Last Name</label>
+                <input name="last_name" type="text" class="form-control" disabled="disabled" id="last_name" value="{{ user.last_name}}">
+            </div>
+        </div>
+
+        <div class="form-group register-form">
+
+            <label for="email">Email Address</label>
+            <input name="email" type="text" class="form-control"  disabled="disabled" id="email" value="{{ user.email }}">
+        </div>
+
+        <div class="col-xs-6 col-sm-6 col-md-6">
+            <div class="form-group">
+                <label for="title">Title</label>
+               <input type="text" class="form-control" disabled="disabled" id="title" name="title"
+                       value="{{ user.title }}">
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6">
+            <div class="form-group">
+                <label for="department">Department</label>
+                <input type="text" class="form-control" disabled="disabled" id="department" name="department"
+                       value="{{ user.department }}">
+            </div>
+        </div>
+
+
+        </div>
+    </form>
+</div>
+
+{% endblock %}

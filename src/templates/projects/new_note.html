@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %} New Note {% endblock %}
+{% block content %}
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+<form method="post">
+    <div class="form-group">
+        <label for="project-note"> Note on Project  "<a href="{{ url_for('projects.home',project_id=project._id) }}">{{ project.name }}</a>"</label>
+        <textarea class="form-control" rows="10" id="project-note" name="project-note"
+                  placeholder="I've been able to achieve the following milestones..."></textarea>
+    </div>
+
+    <div>
+        <input class="btn  btn-success" type="submit" name="submit" value="Submit"/>
+    </div>
+</form>
+</div>
+{% endblock %}
