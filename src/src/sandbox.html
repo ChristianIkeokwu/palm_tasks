@@ -1,0 +1,27 @@
+<!Doctype html>
+<html>
+    <head>
+        <title> Test Bar</title>
+    </head>
+    <script src="static/js/jquery-2.2.0.min.js"></script>
+    <script>
+
+        $.getJSON('results.json', function(data){
+            console.log(data);
+        });
+        /*
+        $.ajax({
+            url: 'results.json',
+            dataType: 'json',
+            type: 'get',
+            cache: true,
+            success: function(data){
+                $(data.results).each(
+                    function(index, value){
+                        console.log(value.name);
+                    });
+            }
+        });
+        */
+    </script>
+</html>

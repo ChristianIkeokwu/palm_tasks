@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+<link rel="icon" href="../../favicon.ico">
+
+{% block title %}  Dashboard  {% endblock %}
+
+{% block custom %}
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug
+<link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+TODO configure IE support -->
+<!-- Custom styles for this template -->
+<link href="{{url_for('static', filename='css/dashboard.css')}}" rel="stylesheet">
+{% endblock %}
+
+
+{% block content %}
+
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <div class="page-header">
+        <h1> Hello, {{ user.first_name.capitalize() }}
+            <small style="color:#50514f"> welcome to your Dashboard!</small>
+            <div class="btn-group pull-right">
+                <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false">
+                    <span class="glyphicon glyphicon-plus"></span> Add New <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="{{url_for('tasks.new_task')}}">Task</a></li>
+                    <li><a href="{{url_for('meetings.new_meeting')}}">Meeting</a></li>
+                    <li><a href="{{url_for('projects.new_project')}}">Project</a></li>
+
+                </ul>
+            </div>
+        </h1>
+
+    </div>
+
+
+    <div class="row placeholders">
+        <div class="col-xs-6 col-sm-3 placeholder">
+            <div id="donut-example" style="width:200px;height:200px"></div>
+            <h4>Daily Progress</h4>
+            <span class="text-muted">Keep it up!</span>
+        </div>
+        <div class="col-xs-6 col-sm-3 placeholder">
+            <div id="donut-example1" style="width:200px;height:200px"></div>
+            <h4>Weekly Progress</h4>
+            <span class="text-muted">it'll soon be friday 😁</span>
+        </div>
+        <div class="col-xs-6 col-sm-3 placeholder">
+            <div id="donut-example2" style="width:200px;height:200px"></div>
+            <h4>Monthly Progress</h4>
+            <span class="text-muted">This is your greatest month yet!</span>
+        </div>
+        <div class="col-xs-6 col-sm-3 placeholder">
+            <div id="donut-example3" style="width:200px;height:200px"></div>
+            <h4>Yearly Progress</h4>
+            <span class="text-muted">It's your year to flourish</span>
+        </div>
+    </div>
+<p style="font-size:23px;">
+    Your Name : {{user}} <br />
+    Your Email : {{ user.email }} <br />
+    Your Department : <a href="{{ url_for('department.home', department_id=user.department._id ) }}">{{ user.department.name }}</a><br />
+</p>
+    <h2 class="sub-header">Projects</h2>
+    <h3> Overall Progress</h3>
+    <div class="progress">
+        <div class="progress-bar progress-bar-success" style="width:{{ user.progress() }}%;min-width: 2em;">
+            <span class="sr-only"> {{ user.progress() }}% Complete (success)</span>{{ user.progress() }}%
+        </div>
+
+    </div>
+    {% for project in user.get_projects() %}
+
+    <h4><a href="{{url_for('projects.home',project_id=project._id)}}"> {{ project.name }} </a></h4>
+    <div class="progress">
+        <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="40"
+             aria-valuemin="0" aria-valuemax="100" style="width: {{project.progress()}}%;min-width: 2em;">
+            <span class="sr-only">{{project.progress()}} Complete (success)</span>
+            {{project.progress()}}%
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+
+
+
+{% endblock %}
+
+{% block custom_script %}
+<script src="{{url_for('static', filename='js/raphael-min.js')}}"></script>
+<script src="{{url_for('static', filename='js/jquery-1.8.2.min.js')}}"></script>
+<script src="{{url_for('static', filename='js/morris-0.4.1.min.js')}}"></script>
+
+{% set list = ['donut-example' ,'donut-example1' ,'donut-example2' ,'donut-example3'] %}
+{% for elem in list %}
+<script>
+    Morris.Donut({
+    element: '{{ elem }}',
+    data: [
+        {label: "Completed Tasks", value: 3},
+        {label: "Pending Tasks", value: 2},
+        {label: "Tasks in Progress", value: 5},
+
+    ],
+    colors: ["#5cb85c",
+            "#7DF939",
+            "#419641",
+  ]
+    });
+
+
+
+
+
+
+
+
+</script>
+{% endfor %}
+
+{% endblock %}
+
+
